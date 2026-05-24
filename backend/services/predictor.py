@@ -65,6 +65,16 @@ def _is_local_tokenizer_ready(path):
     )
 
 
+def _download_file(url, dest_path):
+    import urllib.request
+    print(f"[Download] Downloading {url} to {dest_path}")
+    try:
+        urllib.request.urlretrieve(url, dest_path)
+        print(f"[Download] Successfully downloaded {dest_path}")
+    except Exception as e:
+        print(f"[Download] Failed to download: {e}")
+        raise
+
 def _load_tokenizer(source_name, local_path):
     print(f"[Init] Loading BERT tokenizer...")
     if _is_local_tokenizer_ready(local_path):
@@ -127,7 +137,16 @@ class SentimentPredictor:
             print(f"[Init] Using full checkpoint ({os.path.getsize(full_ckpt)/1024/1024:.0f}MB)")
             print("[Init] Tip: run 'python convert_checkpoint.py' to create a lighter version for faster startup")
         else:
-            raise FileNotFoundError(f"No checkpoint found in {save_folder}")
+            print(f"[Init] No checkpoint found in {save_folder}, trying to download...")
+            os.makedirs(save_folder, exist_ok=True)
+            model_url = "https://huggingface.co/fnlp/bart-base-chinese/resolve/main/pytorch_model.bin"
+            try:
+                _download_file("https://github.com/liu66-8/sentiment-analysis-bert/releases/download/v1.0/BEST_checkpoint_inference.tar", light_ckpt)
+                checkpoint_path = light_ckpt
+                print(f"[Init] Downloaded checkpoint: {checkpoint_path}")
+            except Exception as e:
+                print(f"[Init] Failed to download model: {e}")
+                raise FileNotFoundError(f"No checkpoint found in {save_folder} and download failed")
 
         self.model = BertMultiLabelSentiment(bert_model_name, dropout, checkpoint_path=checkpoint_path,
                                               local_config_path=bert_local_path)
