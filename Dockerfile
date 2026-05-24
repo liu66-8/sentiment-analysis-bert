@@ -17,6 +17,6 @@ COPY . .
 ENV HF_ENDPOINT=https://hf-mirror.com
 ENV HF_HUB_ENABLE_HF_TRANSFER=0
 
-EXPOSE 80
+EXPOSE 8000
 
-CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "80"]
+CMD ["uvicorn", "backend.main:app", "--host", "0.0.0.0", "--port", "8000"]
