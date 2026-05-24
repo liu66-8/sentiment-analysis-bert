@@ -1,0 +1,6 @@
+*.tar
+*.db
+__pycache__/
+.idea/
+*.log
+.DS_Store

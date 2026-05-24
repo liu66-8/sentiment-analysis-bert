@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>细粒度情感分析 - 餐饮评论</title>
+    <link rel="stylesheet" href="https://unpkg.com/element-plus@2.9.7/dist/index.css">
+    <script src="https://unpkg.com/vue@3.5.13/dist/vue.global.prod.js"></script>
+    <script src="https://unpkg.com/vue-router@4.5.0/dist/vue-router.global.prod.js"></script>
+    <script src="https://unpkg.com/element-plus@2.9.7/dist/index.full.min.js"></script>
+    <script src="https://unpkg.com/element-plus@2.9.7/dist/locale/zh-cn.min.js"></script>
+    <script src="https://unpkg.com/echarts@5.5.0/dist/echarts.min.js"></script>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+    <div id="app"></div>
+
+    <script>
+    window.ElMessage = window.ElMessage || (ElementPlus && ElementPlus.ElMessage);
+    window.ElMessageBox = window.ElMessageBox || (ElementPlus && ElementPlus.ElMessageBox);
+    if (window.ElMessage) {
+        if (!window.ElMessage.success) {
+            window.ElMessage.success = function(m) { return window.ElMessage({ message: m, type: 'success', offset: 60 }); };
+            window.ElMessage.error = function(m) { return window.ElMessage({ message: m, type: 'error', offset: 60 }); };
+            window.ElMessage.info = function(m) { return window.ElMessage({ message: m, type: 'info', offset: 60 }); };
+            window.ElMessage.warning = function(m) { return window.ElMessage({ message: m, type: 'warning', offset: 60 }); };
+        }
+    }
+    </script>
+
+    <script src="/js/api.js"></script>
+    <script src="/js/components/TextInput.js"></script>
+    <script src="/js/components/SentimentGauge.js"></script>
+    <script src="/js/components/SentimentCards.js"></script>
+    <script src="/js/components/FileUpload.js"></script>
+    <script src="/js/components/ResultTable.js"></script>
+    <script src="/js/components/RadarChart.js"></script>
+    <script src="/js/components/PieChart.js"></script>
+    <script src="/js/components/BarChart.js"></script>
+    <script src="/js/components/SuggestionsCard.js"></script>
+    <script src="/js/pages/LoginPage.js"></script>
+    <script src="/js/pages/HomePage.js"></script>
+    <script src="/js/pages/BatchPage.js"></script>
+    <script src="/js/pages/HistoryPage.js"></script>
+    <script src="/js/pages/HistoryDetail.js"></script>
+    <script src="/js/pages/StatsPage.js"></script>
+    <script src="/js/pages/ComparePage.js"></script>
+    <script src="/js/app.js"></script>
+</body>
+</html>
