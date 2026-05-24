@@ -3,22 +3,21 @@ import torch
 
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
-# --- Configure BERT models ---
-bert_model_name = 'bert-base-chinese'  # 使用标准 BERT 中文模型
+bert_model_name = 'bert-base-chinese'
 bert_local_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models', 'bert_tokenizer')
-max_seq_len = 256                      # 截断/填充的最大句子长度
-min_word_freq = 3                      # 词频阈值（用于传统 jieba 方式）
+bert_model_cache_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models', 'bert_model_cache')
+max_seq_len = 256
+min_word_freq = 3
 
-# --- Configure training/optimization ---
-learning_rate = 2e-5                   # BERT 微调学习率通常在 1e-5 到 5e-5 之间
-batch_size = 32                        # 8GB 显存建议 32，16GB 以上可尝试 64
+learning_rate = 2e-5
+batch_size = 32
 print_every = 100
 num_labels = 20
-num_classes = 4                        # number of sentimental types
+num_classes = 4
 save_folder = 'models'
 
 start_epoch = 0
-epochs = 10                            # BERT 通常只需要 3-10 个 epoch 即可收敛
+epochs = 10
 dropout = 0.1
 
 train_folder = 'data/ai_challenger_sentiment_analysis_trainingset_20180816'
