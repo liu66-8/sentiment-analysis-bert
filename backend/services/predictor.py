@@ -137,16 +137,9 @@ class SentimentPredictor:
             print(f"[Init] Using full checkpoint ({os.path.getsize(full_ckpt)/1024/1024:.0f}MB)")
             print("[Init] Tip: run 'python convert_checkpoint.py' to create a lighter version for faster startup")
         else:
-            print(f"[Init] No checkpoint found in {save_folder}, trying to download...")
-            os.makedirs(save_folder, exist_ok=True)
-            model_url = "https://huggingface.co/fnlp/bart-base-chinese/resolve/main/pytorch_model.bin"
-            try:
-                _download_file("https://github.com/liu66-8/sentiment-analysis-bert/releases/download/v1.0/BEST_checkpoint_inference.tar", light_ckpt)
-                checkpoint_path = light_ckpt
-                print(f"[Init] Downloaded checkpoint: {checkpoint_path}")
-            except Exception as e:
-                print(f"[Init] Failed to download model: {e}")
-                raise FileNotFoundError(f"No checkpoint found in {save_folder} and download failed")
+            print(f"[Init] No checkpoint found in {save_folder}, using pre-trained model...")
+            checkpoint_path = None
+            print("[Init] Using HuggingFace pre-trained model without fine-tuning")
 
         self.model = BertMultiLabelSentiment(bert_model_name, dropout, checkpoint_path=checkpoint_path,
                                               local_config_path=bert_local_path)
