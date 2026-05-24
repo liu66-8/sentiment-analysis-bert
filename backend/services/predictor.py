@@ -7,7 +7,7 @@ import torch
 from transformers import BertTokenizer, AutoConfig
 
 from config import device, save_folder, bert_model_name, bert_local_path, dropout, max_seq_len, label_names
-from models import BertMultiLabelSentiment
+from models import SentimentModel
 
 LABEL_MAP = {3: '正面', 2: '中性', 1: '负面', 0: '未提及'}
 
@@ -141,8 +141,8 @@ class SentimentPredictor:
             checkpoint_path = None
             print("[Init] Using HuggingFace pre-trained model without fine-tuning")
 
-        self.model = BertMultiLabelSentiment(bert_model_name, dropout, checkpoint_path=checkpoint_path,
-                                              local_config_path=bert_local_path)
+        self.model = SentimentModel(bert_model_name, dropout, checkpoint_path=checkpoint_path,
+                                     local_config_path=bert_local_path)
         print(f"[Init] Model loaded ({time.time()-t1:.1f}s)")
 
         t2 = time.time()

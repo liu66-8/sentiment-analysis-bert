@@ -4,7 +4,7 @@ import torch
 device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
 
 # --- Configure BERT models ---
-bert_model_name = 'hfl/chinese-bert-wwm-ext'  # HuggingFace 模型 ID
+bert_model_name = 'distilbert-base-chinese'  # 使用更小的 DistilBERT 模型
 bert_local_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'models', 'bert_tokenizer')
 max_seq_len = 256                      # 截断/填充的最大句子长度
 min_word_freq = 3                      # 词频阈值（用于传统 jieba 方式）
